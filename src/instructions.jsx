@@ -35,6 +35,8 @@ export const Instructions = (props) => {
 
         const [ button, setButton ] = useState(<p></p>)
         const [ afterText, setAfterText ] = useState(<p></p>)
+        const [ errorStatus, setErrorStatus ] = useState(false);
+
         const nextButton = <button style={buttonStyle} onClick={()=>handleClick()}>Next</button>
         const handleClick = () => {
             setCurrentPage((i)=>i+1)
@@ -46,19 +48,32 @@ export const Instructions = (props) => {
             setAfterText(text)
         }
 
+        const handleError = () => {
+
+            setErrorStatus(true);
+        }
+
+        const errorButton = errorStatus ? 
+        <button onClick={()=>handleClick()}>It seems there was a problem loading the video. Please click here to move on to the next trial.</button> :
+        "";
         
         return(
             <div style = {textStyle}>
+                
                 <p>The video below gives an example.<br></br>
                 There are three flippers. They switch back and forth randomly, between two possible orientations.<br></br>
                 Each flipper moves back and forth for a few seconds, then it stops moving.<br></br>
                 When all flippers have stopped moving, a ball is released.<br></br>
                 The player wins the game if the ball ends up in one of the blue buckets.
                 </p>
-                
-                <video width="400" height="400" src={pinballclipInstructions} autoPlay muted onEnded = {()=> handleEnd()}/>
+                {errorButton}
+                <video width="400" height="400" 
+                src={pinballclipInstructions} 
+                onError={()=>handleError()}
+                autoPlay muted onEnded = {()=> handleEnd()}/>
                 {afterText}
                 {button}
+                
             </div>
             
         )
@@ -66,6 +81,7 @@ export const Instructions = (props) => {
 
     const PageThree = () => {
         const [ button, setButton ] = useState(<p></p>)
+        const [ errorStatus, setErrorStatus ] = useState(false);
 
         const nextButton = <button style={buttonStyle} onClick={()=>handleClick()}>Next</button>
         const handleEnd = ()=>{
@@ -74,10 +90,24 @@ export const Instructions = (props) => {
         const handleClick = () => {
             setCurrentPage((i)=>i+1)
         }
+
+        const handleError = () => {
+
+            setErrorStatus(true);
+        }
+
+        const errorButton = errorStatus ? 
+        <button onClick={()=>handleClick()}>It seems there was a problem loading the video. Please click here to move on to the next trial.</button> :
+        "";
+
         return (
             <div style={textStyle}>
                 <p>If the ball falls off the screen, the player loses the game:</p>
-                <video width="400" height="400" src={pinballcliploss} autoPlay muted onEnded = {()=> handleEnd()}/>
+                {errorButton}
+                <video width="400" height="400"
+                src={pinballcliploss} 
+                autoPlay muted onEnded = {()=> handleEnd()}
+                onError={()=>handleError()}/>
                 {button}
             </div>
             

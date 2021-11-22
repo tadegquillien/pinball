@@ -18,7 +18,7 @@ export const Videodisplay = (props) => {
 
   //select the current video
   const currentvideo = videolist[props.currentTrial];
-  const video = currentvideo.clip;
+  const video = props.currentTrial === 1 ? 34 : currentvideo.clip;
   const direction = currentvideo.A_orientation;
   
 
@@ -27,6 +27,7 @@ export const Videodisplay = (props) => {
   const [status, setStatus] = useState("waiting");
   const [buttonStatus, setButtonStatus] = useState("hidden");
   const [ giveControl, setGiveControl ] = useState(false);
+  const [ errorStatus, setErrorStatus ] = useState(false);
 
 
   //the likert scale
@@ -59,6 +60,7 @@ export const Videodisplay = (props) => {
     setStatus("waiting");
     setButtonStatus("hidden");
     setGiveControl(false);
+    setErrorStatus(false);
     console.log(Data);
     props.setCurrentTrial((i) => i + 1);
     //if we have reached the end of the video list, 
@@ -68,6 +70,18 @@ export const Videodisplay = (props) => {
     }
 
   }
+
+  //handle what happens when the video fails to load
+  const handleError = () => {
+    setResponse("unclicked");
+    setErrorStatus(true);
+  }
+
+//if the video fails to load, a special button allows the participant to move on
+//anyway
+const errorButton = errorStatus ? 
+<button onClick={()=>handleClick()}>It seems there was a problem loading the video. Please click here to move on to the next trial.</button> :
+"";
 
   //the 'NEXT' button is displayed once the player has clicked on the likert scale
   const nextbutton = buttonStatus === "display" ?
@@ -110,8 +124,10 @@ export const Videodisplay = (props) => {
 
 
         <div className="child">
+          {errorButton}
           <video width="400" height="400"
-            src={video} autoPlay muted controls={giveControl} onEnded={() => handleEnd()} />
+            src={video} autoPlay muted controls={giveControl} onEnded={() => handleEnd()}
+            onError={()=>handleError()} />
         </div>
 
 
