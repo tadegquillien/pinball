@@ -11,6 +11,7 @@ const consentStyle = {
 const ConsentForm = (props) => {
     return (
         <div style={consentStyle}>
+            hello
             <h1>Participant Information Sheet</h1>
             <p>This study was certified according to the Informatics Research Ethics Process, RT number 2019/58792. Please take time to read the following information carefully. You should keep this page for your records. </p>
             
