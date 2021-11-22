@@ -18,7 +18,7 @@ export const Videodisplay = (props) => {
 
   //select the current video
   const currentvideo = videolist[props.currentTrial];
-  const video = props.currentTrial === 1 ? 34 : currentvideo.clip;
+  const video = currentvideo.clip;
   const direction = currentvideo.A_orientation;
   
 
