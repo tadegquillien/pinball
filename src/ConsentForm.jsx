@@ -11,7 +11,7 @@ const consentStyle = {
 const ConsentForm = (props) => {
     return (
         <div style={consentStyle}>
-            hello
+            
             <h1>Participant Information Sheet</h1>
             <p>This study was certified according to the Informatics Research Ethics Process, RT number 2019/58792. Please take time to read the following information carefully. You should keep this page for your records. </p>
             
@@ -19,7 +19,7 @@ const ConsentForm = (props) => {
             <p>The researchers are from the Informatics department at the University of Edinburgh: Christopher G. Lucas and Tadeg Quillien.</p>
             
             <h2>What is the purpose of the study?</h2>
-            <p>The purpose of this study is to understand how people think about causes.</p>
+            <p>The purpose of this study is to help us understand how people think about causes.</p>
 
             <h2>Why have I been asked to take part?</h2>
             <p>You’ve been asked to take part because we’re interested in seeing how many different people think about the same task.  </p>
